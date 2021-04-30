@@ -28,13 +28,13 @@ class SubscriptionManager implements SubscriptionManagerInterface, SubscriptionE
         $this->toolManager = $toolManager;
     }
 
-    public function addSubscriber(ListInterface $list, PayloadInterface $payload, array $tags, string $operation = self::OPERATION_CREATE_OR_UPDATE): void
+    public function addSubscriber(ListInterface $list, PayloadInterface $payload, string $operation = self::OPERATION_CREATE_OR_UPDATE): void
     {
         if ($operation === self::OPERATION_CREATE && $this->isSubscribed($list, $payload)) {
             throw new AlreadySubscribedException;
         }
 
-        $this->getSubscriptionTool()->addSubscriber($list, $payload, $tags);
+        $this->getSubscriptionTool()->addSubscriber($list, $payload);
     }
 
     public function getSubscriber(ListInterface $list, PayloadInterface $payload): ?PayloadInterface
